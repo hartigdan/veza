@@ -2,7 +2,9 @@
 
 Veza is an browser based application that displays any live data in a
 well-organized way. It aims to be a freely configurable dashboard with various
-widgets that can be used to display and control various information.
+widgets that can be used to display and control information from various data
+sources and sinks. The driving use case is the integration into a lab-like
+setup.
 
 ## Key Principles
 
@@ -19,3 +21,9 @@ guiding principles:
 * It is time-agnostic, i.e. it shows the current state as fast as it can
   without any sync or sorting of data in a timely manner etc.
 * There's  no user management (login, roles, rights etc…)
+
+## Why the Name?
+
+The Name Veza is a [Zulu word](https://isizulu.net/?-veza) meaning "bring into
+view" or simply "show". Therefore it describes exactly what this project is
+about: Bring your whole lab setup into view.
