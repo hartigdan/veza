@@ -11,5 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build probe/pipe
+    - name: Build all rust modules
       run: cargo build --workspace --verbose
