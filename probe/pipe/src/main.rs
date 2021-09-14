@@ -1,19 +1,22 @@
 use structopt::StructOpt;
 use std::io;
 use log::debug;
+use serde_json::json;
 
 #[derive(StructOpt)]
 struct Cli {
-    #[structopt(short, long)]
-    debug: bool,
+    #[structopt(long)]
+    id: String,
 }
 
 fn main() {
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).expect("Failed to parse");
-
-    debug!("input: {}", input);
+    env_logger::init();
     let args = Cli::from_args();
 
-    println!("{}", input);
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Failed to parse");
+    debug!("input: {}", input.trim());
+
+    let msg = json!({"id": id, "value": input.trim()});
+    println!("{}", msg);
 }
