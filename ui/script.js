@@ -3,7 +3,10 @@
     ws.onmessage = function (event) {
         let items = JSON.parse(event.data);
         items.forEach(function (item) {
-            document.getElementById(item.id).innerHTML = item.value;
+            let el = document.getElementById(item.id);
+            if (el) {
+                el.innerHTML = item.value;
+            }
         });
     }
 })();
