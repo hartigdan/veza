@@ -1,7 +1,9 @@
-use structopt::StructOpt;
-use std::io;
+use cmd_lib::run_fun;
 use log::debug;
 use serde_json::json;
+use std::{io, time::Duration};
+use structopt::StructOpt;
+use std::thread;
 
 #[derive(StructOpt)]
 struct Cli {
@@ -17,6 +19,16 @@ fn main() {
     io::stdin().read_line(&mut input).expect("Failed to parse");
     debug!("input: {}", input.trim());
 
-    let msg = json!({"id": id, "value": input.trim()});
-    println!("{}", msg);
+    while(true)
+    {
+        let val = run_fun! (
+            bash -c ${input}
+        )
+        .expect("error");
+
+        let msg = json!({"id": args.id, "value": val.trim()});
+        println!("{}", msg);
+
+        thread::sleep(Duration::new(1, 0));
+    }
 }
