@@ -12,4 +12,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build probe/pipe
-      run: cd probe/pipe && cargo build --verbose
+      run: cargo build --workspace --verbose
