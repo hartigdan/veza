@@ -1,1 +1,1 @@
-socat - udp-listen:8888
+socat - tcp-listen:8888
