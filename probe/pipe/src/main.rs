@@ -1,9 +1,9 @@
 use cmd_lib::run_fun;
 use log::debug;
 use serde_json::json;
+use std::thread;
 use std::{io, time::Duration};
 use structopt::StructOpt;
-use std::thread;
 
 #[derive(StructOpt)]
 struct Cli {
@@ -19,9 +19,8 @@ fn main() {
     io::stdin().read_line(&mut input).expect("Failed to parse");
     debug!("input: {}", input.trim());
 
-    while(true)
-    {
-        let val = run_fun! (
+    loop {
+        let val = run_fun!(
             bash -c ${input}
         )
         .expect("error");
@@ -29,6 +28,6 @@ fn main() {
         let msg = json!({"id": args.id, "value": val.trim()});
         println!("{}", msg);
 
-        thread::sleep(Duration::new(1, 0));
+        thread::sleep(Duration::from_millis(500));
     }
 }
