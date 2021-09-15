@@ -1,4 +1,8 @@
+dist/index.html:
+	npx webpack
+
 .PHONY: serve-files
+serve-files: dist/index.html
 serve-files:
 	python -m http.server -d dist 8080
 
