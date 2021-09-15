@@ -1,3 +1,12 @@
+fn read_line_buffer() -> String {
+    // Read one line of input buffer-style
+    let mut input = String::new();
+    std::io::stdin()
+        .read_line(&mut input)
+        .expect("Failed to read line");
+    input.trim().to_string()
+}
+
 fn main() {
     env_logger::init();
 
@@ -6,9 +15,9 @@ fn main() {
         std::thread::spawn(move || {
             let mut websocket = tungstenite::server::accept(stream.unwrap()).unwrap();
             loop {
-                let msg = tungstenite::protocol::Message::text("Hello");
+                let input = read_line_buffer();
+                let msg = tungstenite::protocol::Message::text(input);
                 websocket.write_message(msg).unwrap();
-                std::thread::sleep(std::time::Duration::from_millis(100));
             }
         });
     }
