@@ -1,2 +1,2 @@
 [workspace]
-members = ["probe/*", "merge"]
+members = ["probe/*", "merge", "serve"]
