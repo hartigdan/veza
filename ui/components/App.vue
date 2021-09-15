@@ -9,13 +9,15 @@
       :row-end="tile.rowEnd"
     >
       <h2>{{ tile.title }}</h2>
-      <p>{{ tile.value }}</p>
+      <component :is="tile.type" v-bind="tile" />
     </Tile>
   </div>
 </template>
 
 <script>
 import Tile from "./Tile.vue";
+import TextWidget from "./TextWidget.vue";
+import GaugeWidget from "./GaugeWidget.vue";
 
 export default {
   created: function () {
@@ -35,8 +37,11 @@ export default {
       tiles: [
         {
           id: "cpu_percent",
+          type: "GaugeWidget",
           title: "CPU",
-          value: "",
+          value: 0,
+          min: 0,
+          max: 100,
           columnStart: 1,
           columnEnd: 2,
           rowStart: 1,
@@ -44,6 +49,7 @@ export default {
         },
         {
           id: "cpu_freq_current",
+          type: "TextWidget",
           title: "Current Freq.",
           value: "",
           columnStart: 2,
@@ -53,6 +59,7 @@ export default {
         },
         {
           id: "disk_io_read_bytes",
+          type: "TextWidget",
           title: "Disk I/O read",
           value: "",
           columnStart: 3,
@@ -62,6 +69,7 @@ export default {
         },
         {
           id: "disk_io_write_bytes",
+          type: "TextWidget",
           title: "Disk I/O write",
           value: "",
           columnStart: 1,
@@ -71,6 +79,7 @@ export default {
         },
         {
           id: "net_io_bytes_sent",
+          type: "TextWidget",
           title: "Net I/O sent",
           value: "",
           columnStart: 3,
@@ -80,6 +89,7 @@ export default {
         },
         {
           id: "net_io_bytes_recv",
+          type: "TextWidget",
           title: "Net I/O recv",
           value: "",
           columnStart: 3,
@@ -89,6 +99,7 @@ export default {
         },
         {
           id: "datetime_now",
+          type: "TextWidget",
           title: "Datetime",
           value: "",
           columnStart: 4,
@@ -100,6 +111,8 @@ export default {
     };
   },
   components: {
+    GaugeWidget,
+    TextWidget,
     Tile,
   },
 };
