@@ -28,7 +28,7 @@ def dummy_data():
             'id': 'datetime_now',
             'value': f'{datetime.now()}'
         }]
-        print(json.dumps(items))
+        print(json.dumps(items), flush=True)
         time.sleep(1)
 
 
