@@ -24,5 +24,7 @@ export default {
 .tile {
   background: #666;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 </style>
