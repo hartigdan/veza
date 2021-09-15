@@ -1,5 +1,4 @@
 fn read_line_buffer() -> String {
-    // Read one line of input buffer-style
     let mut input = String::new();
     std::io::stdin()
         .read_line(&mut input)
@@ -8,8 +7,6 @@ fn read_line_buffer() -> String {
 }
 
 fn main() {
-    env_logger::init();
-
     let server = std::net::TcpListener::bind("localhost:8765").unwrap();
     for stream in server.incoming() {
         std::thread::spawn(move || {
