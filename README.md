@@ -22,6 +22,10 @@ guiding principles:
   without any sync or sorting of data in a timely manner etc.
 * There's  no user management (login, roles, rights etc…)
 
+## Architectural Overview
+
+![Veza Architectural Overview](./doc/overview.png)
+
 ## Why the Name?
 
 The Name Veza is a [Zulu word](https://isizulu.net/?-veza) meaning "bring into
