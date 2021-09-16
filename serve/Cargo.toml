@@ -7,3 +7,9 @@ edition = "2018"
 
 [dependencies]
 tungstenite = "0.13.0"
+
+[dev-dependencies]
+anyhow = "1.0.40"
+assert_cmd = "0.10"
+predicates = "1"
+url = "2.2.2"
