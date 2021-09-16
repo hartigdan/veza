@@ -13,3 +13,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build all rust modules
       run: cargo build --workspace --verbose
+    - name: Test all rust modules
+      run: cargo test --workspace --verbose
