@@ -1,6 +1,7 @@
 use clap::Clap;
 use std::error::Error;
 use std::net::SocketAddr;
+use tokio::io::AsyncWriteExt;
 use tokio::sync::mpsc;
 use tokio_stream::StreamExt;
 use tokio_util::codec::{Framed, LinesCodec};
@@ -42,19 +43,26 @@ async fn process(
 async fn main() -> Result<(), Box<dyn Error>> {
     let cmd_line_opts = opts::CmdLineOpts::parse();
 
-    let listener = tokio::net::TcpListener::bind(&cmd_line_opts.tcp_bind_address).await?;
+    let (tx, mut rx): (
+        mpsc::UnboundedSender<String>,
+        mpsc::UnboundedReceiver<String>,
+    ) = mpsc::unbounded_channel();
 
-    // Create a channel where input from each client is collected and then written to stdout.
-    let (tx, mut rx) = mpsc::unbounded_channel();
+    // Create a client that pushes the output to the `serve` entity.
 
+    let mut sender = tokio::net::TcpStream::connect(&cmd_line_opts.target).await?;
     tokio::spawn(async move {
         loop {
-            if let Some(msg) = rx.recv().await {
-                println!("{}", msg);
+            if let Some(mut msg) = rx.recv().await {
+                msg.push_str("\n");
+                sender.write_all(msg.as_bytes()).await.unwrap();
             }
         }
     });
 
+    // Create a server that accepts input from each probe.
+
+    let listener = tokio::net::TcpListener::bind(&cmd_line_opts.bind).await?;
     loop {
         // Asynchronously wait for an inbound TcpStream.
         let (stream, addr) = listener.accept().await?;

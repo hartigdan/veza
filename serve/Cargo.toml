@@ -7,3 +7,4 @@ edition = "2018"
 
 [dependencies]
 tungstenite = "0.13.0"
+anyhow = "1.0.38"
