@@ -14,7 +14,7 @@ pid_serve=$!
 pid_mux=$!
 sleep 1;
 socat exec:"python ../serve/dummy_input.py" tcp:127.0.0.1:8888 &
-make -C ../ui/ serve-files &
+npm -C ../ui/ run serve-files &
 pid_server=$!
 sleep 1
 xdg-open http://localhost:8080

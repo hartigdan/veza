@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="app color-scheme">
     <Tile
       v-for="(tile, index) in tiles"
       :key="index"
@@ -18,6 +18,7 @@
 import Tile from "./Tile.vue";
 import TextWidget from "./TextWidget.vue";
 import GaugeWidget from "./GaugeWidget.vue";
+import "@fontsource/inter";
 
 export default {
   created: function () {
@@ -118,32 +119,23 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 *,
 *::before,
 *::after {
   font-size: 1rem;
   margin: 0;
   padding: 0;
+  font-weight: normal;
 }
 
-h2 {
-  font-size: 1.5rem;
-}
-
-p {
-  margin: 1em 0;
-}
-
-body {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  display: flex;
-  color: #fff;
+.color-scheme {
+  --background: #242424;
 }
 
 .app {
+  font-family: Inter, sans-serif;
+  background: var(--background);
   display: grid;
   column-gap: 1rem;
   row-gap: 1rem;

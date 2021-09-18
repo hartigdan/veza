@@ -1,42 +1,52 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { VueLoaderPlugin } = require('vue-loader')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
+const distDir = path.resolve(__dirname, 'dist');
 
 module.exports = {
     mode: 'development',
     entry: './main.js',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: distDir,
     },
     module: {
         rules: [{
-            test: /\.vue$/,
+            test: /\.vue$/i,
             use: [
-                'vue-loader'
+                'vue-loader',
             ]
         }, {
-            test: /\.css$/,
+            test: /\.css$/i,
             use: [
                 'vue-style-loader',
-                'css-loader'
+                'css-loader',
             ]
         }, {
-            test: /\.js$/,
+            test: /\.js$/i,
             exclude: /node_modules/,
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: ['@babel/preset-env']
+                    presets: ['@babel/preset-env'],
                 }
             }
         }, {
-            test: /\.(ijmap|svg|ttf|woff|woff2|eot)$/i,
-            loader: 'file-loader'
+            test: /\.(woff|woff2)$/i,
+            type: 'asset/resource',
         }]
     },
     plugins: [
         new VueLoaderPlugin(),
-        new HtmlWebpackPlugin()
-    ]
-}
+        new HtmlWebpackPlugin({
+            title: 'Veza',
+        }),
+    ],
+    devServer: {
+        static: {
+            directory: distDir
+        },
+        compress: true,
+        port: 8080,
+    },
+};

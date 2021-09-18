@@ -22,7 +22,6 @@ export default {
 
 <style scoped>
 .tile {
-  background: #666;
   padding: 1rem;
   display: flex;
   flex-direction: column;
