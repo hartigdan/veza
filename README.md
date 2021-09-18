@@ -1,5 +1,8 @@
 # Veza - A Dashboard for your Lab
 
+[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE.txt)
+[![Discord](https://img.shields.io/badge/chat-Discord-5865f2?style=flat-square&logo=discord)](https://discord.gg/fWSzFa67XT)
+
 Veza is an browser based application that displays any live data in a
 well-organized way. It aims to be a freely configurable dashboard with various
 widgets that can be used to display and control information from various data
